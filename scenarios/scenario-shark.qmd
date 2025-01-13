@@ -1,0 +1,14 @@
+---
+title: "Sharknado!"
+---
+
+You are an analyst for an insurance agency concerned with increasing payouts for property damage with a warming climate. 
+Your boss recently saw Sharknado (2013) while trying to battle insomnia, and has become concerned about the increased likelihood of shark-infested weather as severe weather events become more probable due to climate change. 
+
+Your boss's  concerns about the possiblity of shark-infested storms cannot be countered with logic, but you might be able to convince them that very few storms even have shark-infestation potential. 
+
+
+Assemble data from one or more reputable sources (NOAA, USGS, etc.).  
+Assess the probability that tornadoes form in coastal areas (Atlantic, Pacific, and Gulf of Mexico) and move inward, compared to the probability that tornadoes form inland and move toward the coast. 
+You should consider both the probability of a coastal -> inland tornadic event and the consequences -- a F0 tornado is unlikely to have the power to lift sharks from the water, while an F5 tornado might have the ability to transport many sharks inland. 
+How serious is the sharknado threat to your bottom line?

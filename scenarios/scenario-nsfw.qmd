@@ -1,0 +1,10 @@
+---
+title: "Not Safe For Work"
+---
+
+Scenario Description:
+
+You are a statistical analyst for a company with both industrial/manufacturing and office spaces. Your safety officer recently read [this article](https://www.aftermath.com/content/office-injury-statistics/) about office injury statistics and wants you to evaluate whether the company needs to implement stronger safety policies for office workers, as they are more likely to be injured through falls than non-office workers.
+
+Assemble data from one or more reputable sources (Bureau of Labor Statistics, Centers for Disease Control, Occupational Safety and Health Administration) to assess the risk of on-the-job injury for office and non-office workers. Consider both the severity of the injury and the probability of occurrence. 
+

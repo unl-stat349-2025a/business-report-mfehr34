@@ -1,0 +1,17 @@
+---
+title: "The Power of Climate Change"
+---
+
+Scenario Description:
+
+You are an analyst working for an electrical utility. 
+A manager at one of the power plants has recently approached you about climate resilience strategies. 
+The power plant is situated along the Gulf of Mexico in Dauphin Island, AL, and uses the Gulf as an heatsink. 
+
+Currently, the plant is designed around the assumption that the temperature of the gulf will be below 85$^\circ$F (this assumption was relatively reasonable when the plant was built in 1970). 
+When the water temperature is above this point, the plant must operate at reduced capacity, as it cannot transfer additional thermal energy into the water.
+
+Assemble data from one or more reputable sources (USGS, NOAA, US Energy Information Administration). 
+Make an operational assessment of the risk that the plant will have to operate at reduced capacity during the next 5 years. 
+Consider both the probability of reduced operating capacity as well as the timing of that capacity (e.g. you should also look at electrical usage during those periods). 
+

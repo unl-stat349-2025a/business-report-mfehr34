@@ -1,0 +1,31 @@
+project:
+  type: book  
+  output-dir: docs
+
+book:
+  title: "Evaluation of <scenario>"
+  author: "Author Name"
+  page-footer:
+    left: "Copyright 2025, Author Name"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+  appendices:
+    - draft-data-doc.qmd
+    - draft-results.qmd
+    - draft-intro-conclusions.qmd
+    - draft-exec-summary.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    highlight-style: a11y
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

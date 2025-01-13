@@ -1,0 +1,14 @@
+---
+title: "London Bridge is Falling Down"
+---
+
+Scenario Description:
+
+You are an analyst for the Omaha, NE city government. 
+The mayor, concerned about the degrading transportation infrastructure in the city, has asked you to assess the risk of bridge failure to the city, after well-publicized bridge collapses in cities on the East Coast in 2024. 
+
+Assemble data from one or more reputable sources (State and national DOT, Army Corps of Engineers, etc.). 
+Assess the risk of a bridge collapse event occurring over the next 5 years, using publicly available data. 
+You should consider both the probability of such a collapse and the consequences -- a small county road bridge collapse is less problematic than e.g. the I-80 bridge over the Missouri collapsing.
+What interventions do you recommend to minimize the risk?
+
