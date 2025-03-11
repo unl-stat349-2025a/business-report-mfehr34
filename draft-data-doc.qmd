@@ -6,63 +6,58 @@ title: "Draft: Data Documentation"
 
 The **Historical Dauphin Island Meteorological Data Set** will be used to analyze water temperature data for this business report.
 
-The data was collected by the National Data Buoy Center (NDBC), a branch of the National Oceanic and Atmospheric Administration (NOAA). It was collected to record hourly metrics for the Dauphin Island coast. The NDBC used one of their many Moored Buoys to record data on barometric pressure, wind direction/speed/gust, air/sea temperature, and wave energy spectra. This specific buoy is located right off the east coast of Dauphin Island, AL.  
+The data was collected by the National Data Buoy Center (NDBC), a branch of the National Oceanic and Atmospheric Administration (NOAA). It was collected to record hourly metrics for the Dauphin Island coast. The NDBC used one of their many Moored Buoys to record data on barometric pressure, wind direction/speed/gust, air/sea temperature, and wave energy spectra. This specific buoy is located right off the east coast of Dauphin Island, AL.
 
 There are three data sets that have the exact same data and structure that I will be combining to analyze the trends of water temperature. These data sets are separated by year, from the years 2022, 2023, and 2024. Data was collected every six minutes, every day of the year (starting in October for the 2022 data), and recorded as a new instance.
 
 The files are in a tab delimited .txt format. Missing data points are denoted by values of 99.00 or 999.0. The fields in this data set are:
 
-- **YY** = year
-- **MM** = month
-- **DD** = day
-- **hh** = hour
-- **mm** = minute
-- **WDIR** = wind direction (degrees clockwise from North)
-- **WSPD** = wind speed (m/s)
-- **GST** = peak 5 or 8 second gust speed (m/s)
-- **WVHT** = significant wave height (m)
-- **DPD** = dominant wave period (sec)
-- **APD** = average wave period (sec)
-- **MWD** = direction from which waves at dominant period are coming (degrees clockwise from North)
-- **PRES** = sea level pressure (hPa, hectopascal)
-- **ATMP** = air temperature (degrees celsius)
-- **WTMP** = sea surface temperatrue (degrees celsius)
-- **DEWP** = dewpoint temperature (degrees celsius)
-- **VIS** = station visibility (nautical miles)
-- **TIDE** = water level above or below mean lower low water (ft)
+-   **YY** = year
+-   **MM** = month
+-   **DD** = day
+-   **hh** = hour
+-   **mm** = minute
+-   **WDIR** = wind direction (degrees clockwise from North)
+-   **WSPD** = wind speed (m/s)
+-   **GST** = peak 5 or 8 second gust speed (m/s)
+-   **WVHT** = significant wave height (m)
+-   **DPD** = dominant wave period (sec)
+-   **APD** = average wave period (sec)
+-   **MWD** = direction from which waves at dominant period are coming (degrees clockwise from North)
+-   **PRES** = sea level pressure (hPa, hectopascal)
+-   **ATMP** = air temperature (degrees celsius)
+-   **WTMP** = sea surface temperatrue (degrees celsius)
+-   **DEWP** = dewpoint temperature (degrees celsius)
+-   **VIS** = station visibility (nautical miles)
+-   **TIDE** = water level above or below mean lower low water (ft)
 
 The NDBC has implemented several automated processes to check quality control. When a system is detected as defective, its data is immediately taken down from the web site. Measurements from duplicate sensors are checked to make sure they match.
 
 The NOAA has released all their data publicly with no restrictions on usage.
 
+**Source:** @usdepartmentofcommerceNationalDataBuoy
 
 ## Energy Data
 
-The **Historical SOCO Energy Data Set** will be used to analyze energy demand, generation, and interchange data for this report. 
+The **Historical SOCO Energy Data Set** will be used to analyze energy demand, generation, and interchange data for this report.
 
 The data comes from the U.S. Energy Information Administration (EIA), but was originally collected by the balancing authority Southern Company (SOCO). SOCO is the largest energy company in the Southeast region of the United States. They collected this data for the purposes of balancing and forecasting electricity supply, demand, and interchange in real time.
 
-This data set houses *daily* data on electricity in the Southeast. The data was collected from 3/1/2024 to 2/27/2025. 
+This data set houses *daily* data on electricity in the Southeast. The data was collected from 3/1/2024 to 2/27/2025.
 
-The data file is set up as a .csv file. The EIA performed imputations on extreme and missing values before making the data available, so there are no missing values. 
+The data file is set up as a .csv file. The EIA performed imputations on extreme and missing values before making the data available, so there are no missing values.
 
 The fields included are:
 
-- **BA Code**: balancing authority code (SOCO is the only value in this dataset)
-- **Timestamp**: date when data was collected (MM/DD/YYYY)
-- **Demand**: the amount of electricity load within SOCO's electric system (MWh)
-- **Demand Forecast**: electricity demand forecast for the next day (MWh)
-- **Net Generation**: the metered output of electric generating units in the electric system (MWh)
-- **Total Interchange**: The net metered tie line (a transmission line connecting power systems) flow from one BA to another interconnected BA (MWh)
+-   **BA Code** = balancing authority code (SOCO is the only value in this dataset)
+-   **Timestamp** = date when data was collected (MM/DD/YYYY)
+-   **Demand** = the amount of electricity load within SOCO's electric system (MWh)
+-   **Demand Forecast** = electricity demand forecast for the next day (MWh)
+-   **Net Generation** = the metered output of electric generating units in the electric system (MWh)
+-   **Total Interchange** = The net metered tie line (a transmission line connecting power systems) flow from one BA to another interconnected BA (MWh)
 
 The quality of the data is uncertain. The data is preliminary and is made available "as-is" by the EIA. There were a few processes/imputations done by the EIA to ensure minimum data quality, but the EIA is not responsible for a reliance on the data.
 
 Since the EIA is a government program, the data can be freely used while properly citing.
 
-
-
-
-
-
-
-
+**Source:** @USEnergy
