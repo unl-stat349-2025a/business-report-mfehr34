@@ -2,3 +2,30 @@
 title: "Draft: Results"
 ---
 
+## Data
+
+The Water Temperature data comes from 3 different datasets, one for each year (2022, 2023, 2024). To create the dataset used for analysis, these 3 separate datasets were first combined into one dataset with 20,334 records. Then, Month and Year fields were extracted from the Timestamp variable so that they could be used separately for analysis. Finally, missing values were considered and dealt with. Only 2.84% of Timestamps didn't have a corresponding water temperature measurement. Since that percentage was very low, those rows were dropped. This workflow is visualized here:
+
+![](Water-data-workflow.png){fig-align="center"}
+
+The values in the water temperature field were measured in degrees Celsius. The mean water temperature was 22.58 degrees Celsius (72.64 degrees Fahrenheit) with a standard deviation of 6.58 degrees. The minimum water temperature is 7.90 degrees Fahrenheit and the maximum is 35.20 degrees Fahrenheit. In Figure 1, the trend and periodic changes of water temperature over time are visualized. The maximum occurred on April 6, 2022. The minimum occurred each on January 22, 2022; January 23, 2022; and January 22, 2024.
+
+![**Figure 1:** Water Temperature Over Time. Date is on the x-axis and Temperature is on the y-axis. The red dashed line shows the reduced capacity threshold of 85 degrees Fahrenheit (29 degrees Celsius).](WaterTempOverTimeLineChart.png)
+
+Preparing the Energy data was much more straightforward. The data had 364 records with no missing values. The data contains measurements from March 1, 2024 to February 27, 2025. The only significant transformation was extracting Month and Year fields from the provided Timestamp field.
+
+The values in the electricity demand field were measured in megawatt-hour. The mean demand was 658,977 megawatt-hours with a standard deviation 105,189 megawatt-hours. The minimum demand was 489,834 observed on April 13, 2024. The maximum demand was 990,613 observed on January 1, 2025. In Figure 2, the trend of electrical demand over time is visualized. The overall trend and main effects are harder to pick out than for water temperature.
+
+![](DemandOverTime.png){fig-alt="Figure 2: Electricity Demand Over Time. Timestamp is on the x-axis and Demand is on the y-axis." fig-align="center" width="550"}
+
+## Analysis
+
+After exploring the descriptive statistics, a standard linear model was fitted to the Water Temperature data with the year and month fields as inputs and the water temperature as the output. Year was treated as a numeric variable, while month was a factor. The F-statistic for the model was 12,200 (p-value \< 2e-16). The main effects for each month and year were all significant with each one having a p-value less than 2e-16. The main effect with the largest estimate was July with a value of 17.29. The main effect with the smallest estimate was the Year with a value of 0.22. The estimate for the intercept was also significant with a p-value less than 2e-16. The Adjusted R-squared was 0.8811 suggesting a good fit.
+
+The next step was to predict the next 5 years of water temperatures using the fitted model. The predictions are visualized in Figure 3. 18 months over the next fifteen years were predicted to have water temperatures above 85 degrees Fahrenheit. 17 out of 18 of those months have a 99% chance or greater to be above 85 degrees according to this model.
+
+![**Figure 3.** Projected Water Temperature Over the Next 5 Years. Date is on the x-axis and Water Temperature is on the y-axis.](WaterTempFuture.png){fig-align="center"}
+
+The secondary analysis was to examine the electrical demand over the next 5 years (2025-2029), specifically looking at the months that were predicted to have a water temperature of greater than 85 degrees. These months are when the plant will have to operate at reduced capacity, limiting the amount of energy output. A standard linear model was fit to the energy data with the inputs as the Year and Month fields and the output as electricity demand. Again, Year was treated as a numerical variable and Month as a factor. The model had an F-statistic of 66.26 (p-value \< 2e-16). Every main effect for the month was significant except for May and September with p-values greater than 0.53. The main effect for Year and the intercept were also significant. The adjusted R-squared for the model was 0.66 suggesting a decent fit. Finally, demand for the next five years was predicted and is visualized in Figure 4.
+
+![**Figure 4.** Projected Electricity Demand Over the Next 5 Years. Time on the x-axis and Demand on the y-axis.](DemandFuture.png){fig-align="center" width="539"}

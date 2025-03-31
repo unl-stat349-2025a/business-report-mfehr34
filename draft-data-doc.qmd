@@ -49,12 +49,12 @@ The data file is set up as a .csv file. The EIA performed imputations on extreme
 
 The fields included are:
 
--   **BA Code** = balancing authority code (SOCO is the only value in this dataset)
+-   **BA_Code** = balancing authority code (SOCO is the only value in this dataset)
 -   **Timestamp** = date when data was collected (MM/DD/YYYY)
 -   **Demand** = the amount of electricity load within SOCO's electric system (MWh)
--   **Demand Forecast** = electricity demand forecast for the next day (MWh)
--   **Net Generation** = the metered output of electric generating units in the electric system (MWh)
--   **Total Interchange** = The net metered tie line (a transmission line connecting power systems) flow from one BA to another interconnected BA (MWh)
+-   **Demand_Forecast** = electricity demand forecast for the next day (MWh)
+-   **Net_Generation** = the metered output of electric generating units in the electric system (MWh)
+-   **Total_Interchange** = The net metered tie line (a transmission line connecting power systems) flow from one BA to another interconnected BA (MWh)
 
 The quality of the data is uncertain. The data is preliminary and is made available "as-is" by the EIA. There were a few processes/imputations done by the EIA to ensure minimum data quality, but the EIA is not responsible for a reliance on the data.
 

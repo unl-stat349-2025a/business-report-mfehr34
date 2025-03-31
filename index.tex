@@ -1,0 +1,473 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Evaluation of },
+  pdfauthor={Author Name},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Evaluation of}
+\author{Author Name}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, sharp corners, frame hidden, enhanced]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
+
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+You are a data scientist for a mid-sized business, in a small group of
+3-4 data scientists. You've been tasked with creating a report
+evaluating a scenario for your business. Your colleagues will also be
+evaluating the same scenario, and your reports will be used in aggregate
+to determine a consensus (or lack thereof) on the company's action. The
+reports will also be used to inform downsizing that is rumored to be
+coming - you want to ensure your report is better than your peers so
+that you aren't as easy to cut.
+
+You may talk to your peers who are assigned the same scenario, but you
+do not want to collaborate too closely, lest you both become targets of
+the rumored layoffs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+I've scaffolded this report for you to make this process easier - as we
+talk about different sections of a report in class and read about how to
+create similar sections, you will practice by writing the equivalent
+section of your report.
+
+The basic steps for this task are as follows:
+
+\begin{itemize}
+\item
+  Identify the research question from the business question
+\item
+  Identify data set(s) which are (1) publicly available (you don't have
+  a budget to pay for private data) and (2) relevant to your task
+
+  \begin{itemize}
+  \tightlist
+  \item
+    (HW Week 6) Document your data sets in \texttt{draft-data-doc.qmd}
+  \end{itemize}
+\item
+  Conduct a statistical analysis to support your answer to your research
+  and business questions
+
+  \begin{itemize}
+  \item
+    Write a methods section for your business report corresponding to
+    your statistical analysis
+  \item
+    (HW Week 9) Draft of results section of business report with
+    relevant graphics/visual aids in \texttt{draft-results.qmd}
+  \end{itemize}
+\item
+  Write your report
+
+  \begin{itemize}
+  \item
+    (HW Week 10) Draft of Intro/Conclusion sections in
+    \texttt{draft-intro-conclusions.qmd}
+  \item
+    (HW Week 11) Draft of Executive summary section in
+    \texttt{draft-exec-summary.qmd}
+  \end{itemize}
+\item
+  Revise your report
+
+  \begin{itemize}
+  \item
+    (HW Week 12 -- not turned in) Revise your report
+  \item
+    (HW Week 13) - Rough draft of report due. Create one or more qmd
+    files for your report (you can overwrite or delete intro.qmd and
+    summary.qmd), include the names of each file (in order) in
+    \texttt{\_quarto.yml}. You should use references (edit
+    references.bib and use pandoc citations). Make sure your report
+    compiles and looks reasonable in both html and pdf.
+  \item
+    Develop a presentation to go along with your report (Week 13).
+    Create slides for your report using quarto.
+  \end{itemize}
+\item
+  Peer revise reports
+
+  \begin{itemize}
+  \item
+    Peer revise reports
+  \item
+    (HW Week 14) - Make edits to your report from comments received from
+    peer review
+  \end{itemize}
+\item
+  Final report \& presentation due
+\end{itemize}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+This is a book created from markdown and executable code.
+
+See Knuth (1984) for additional discussion of literate programming.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{summary}{%
+\chapter{Summary}\label{summary}}
+
+In summary, this book has no content whatsoever.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-USEnergy}{}}%
+{``Homepage - u.s. Energy Information Administration (EIA).''} n.d.
+\url{https://www.eia.gov/index.php}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-knuth84}{}}%
+Knuth, Donald E. 1984. {``Literate Programming.''} \emph{Comput. J.} 27
+(2): 97--111. \url{https://doi.org/10.1093/comjnl/27.2.97}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-usdepartmentofcommerceNationalDataBuoy}{}}%
+US Department of Commerce, National Oceanic, and Atmospheric
+Administration. n.d. {``National Data Buoy Center.''}
+\url{https://www.ndbc.noaa.gov/}.
+
+\end{CSLReferences}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Appendices}
+\appendix
+
+\hypertarget{draft-data-documentation}{%
+\chapter{Draft: Data Documentation}\label{draft-data-documentation}}
+
+\hypertarget{water-temperature-data}{%
+\section{Water Temperature Data}\label{water-temperature-data}}
+
+The \textbf{Historical Dauphin Island Meteorological Data Set} will be
+used to analyze water temperature data for this business report.
+
+The data was collected by the National Data Buoy Center (NDBC), a branch
+of the National Oceanic and Atmospheric Administration (NOAA). It was
+collected to record hourly metrics for the Dauphin Island coast. The
+NDBC used one of their many Moored Buoys to record data on barometric
+pressure, wind direction/speed/gust, air/sea temperature, and wave
+energy spectra. This specific buoy is located right off the east coast
+of Dauphin Island, AL.
+
+There are three data sets that have the exact same data and structure
+that I will be combining to analyze the trends of water temperature.
+These data sets are separated by year, from the years 2022, 2023, and
+2024. Data was collected every six minutes, every day of the year
+(starting in October for the 2022 data), and recorded as a new instance.
+
+The files are in a tab delimited .txt format. Missing data points are
+denoted by values of 99.00 or 999.0. The fields in this data set are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{YY} = year
+\item
+  \textbf{MM} = month
+\item
+  \textbf{DD} = day
+\item
+  \textbf{hh} = hour
+\item
+  \textbf{mm} = minute
+\item
+  \textbf{WDIR} = wind direction (degrees clockwise from North)
+\item
+  \textbf{WSPD} = wind speed (m/s)
+\item
+  \textbf{GST} = peak 5 or 8 second gust speed (m/s)
+\item
+  \textbf{WVHT} = significant wave height (m)
+\item
+  \textbf{DPD} = dominant wave period (sec)
+\item
+  \textbf{APD} = average wave period (sec)
+\item
+  \textbf{MWD} = direction from which waves at dominant period are
+  coming (degrees clockwise from North)
+\item
+  \textbf{PRES} = sea level pressure (hPa, hectopascal)
+\item
+  \textbf{ATMP} = air temperature (degrees celsius)
+\item
+  \textbf{WTMP} = sea surface temperatrue (degrees celsius)
+\item
+  \textbf{DEWP} = dewpoint temperature (degrees celsius)
+\item
+  \textbf{VIS} = station visibility (nautical miles)
+\item
+  \textbf{TIDE} = water level above or below mean lower low water (ft)
+\end{itemize}
+
+The NDBC has implemented several automated processes to check quality
+control. When a system is detected as defective, its data is immediately
+taken down from the web site. Measurements from duplicate sensors are
+checked to make sure they match.
+
+The NOAA has released all their data publicly with no restrictions on
+usage.
+
+US Department of Commerce and Administration (n.d.)
+
+\hypertarget{energy-data}{%
+\section{Energy Data}\label{energy-data}}
+
+The \textbf{Historical SOCO Energy Data Set} will be used to analyze
+energy demand, generation, and interchange data for this report.
+
+The data comes from the U.S. Energy Information Administration (EIA),
+but was originally collected by the balancing authority Southern Company
+(SOCO). SOCO is the largest energy company in the Southeast region of
+the United States. They collected this data for the purposes of
+balancing and forecasting electricity supply, demand, and interchange in
+real time.
+
+This data set houses \emph{daily} data on electricity in the Southeast.
+The data was collected from 3/1/2024 to 2/27/2025.
+
+The data file is set up as a .csv file. The EIA performed imputations on
+extreme and missing values before making the data available, so there
+are no missing values.
+
+The fields included are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{BA Code}: balancing authority code (SOCO is the only value in
+  this dataset)
+\item
+  \textbf{Timestamp}: date when data was collected (MM/DD/YYYY)
+\item
+  \textbf{Demand}: the amount of electricity load within SOCO's electric
+  system (MWh)
+\item
+  \textbf{Demand Forecast}: electricity demand forecast for the next day
+  (MWh)
+\item
+  \textbf{Net Generation}: the metered output of electric generating
+  units in the electric system (MWh)
+\item
+  \textbf{Total Interchange}: The net metered tie line (a transmission
+  line connecting power systems) flow from one BA to another
+  interconnected BA (MWh)
+\end{itemize}
+
+The quality of the data is uncertain. The data is preliminary and is
+made available ``as-is'' by the EIA. There were a few
+processes/imputations done by the EIA to ensure minimum data quality,
+but the EIA is not responsible for a reliance on the data.
+
+Since the EIA is a government program, the data can be freely used while
+properly citing.
+
+{``Homepage - u.s. Energy Information Administration (EIA)''} (n.d.)
+
+\hypertarget{draft-results}{%
+\chapter{Draft: Results}\label{draft-results}}
+
+\hypertarget{draft-introconclusions}{%
+\chapter{Draft: Intro/Conclusions}\label{draft-introconclusions}}
+
+\hypertarget{draft-executive-summary}{%
+\chapter{Draft: Executive Summary}\label{draft-executive-summary}}
+
+
+
+\end{document}
