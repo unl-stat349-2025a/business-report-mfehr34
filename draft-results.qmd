@@ -16,7 +16,7 @@ Preparing the Energy data was much more straightforward. The data had 364 record
 
 The values in the electricity demand field were measured in megawatt-hour. The mean demand was 658,977 megawatt-hours with a standard deviation 105,189 megawatt-hours. The minimum demand was 489,834 observed on April 13, 2024. The maximum demand was 990,613 observed on January 1, 2025. In Figure 2, the trend of electrical demand over time is visualized. The overall trend and main effects are harder to pick out than for water temperature.
 
-![](DemandOverTime.png){fig-alt="Figure 2: Electricity Demand Over Time. Timestamp is on the x-axis and Demand is on the y-axis." fig-align="center" width="550"}
+![**Figure 2:** Electricity Demand Over Time. Timestamp is on the x-axis and Demand is on the y-axis.](DemandOverTime.png){fig-align="center" width="550"}
 
 ## Analysis
 
