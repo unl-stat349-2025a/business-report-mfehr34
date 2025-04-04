@@ -3,10 +3,10 @@ project:
   output-dir: docs
 
 book:
-  title: "Evaluation of <scenario>"
-  author: "Author Name"
+  title: "Evaluation of The Power of Climate Change"
+  author: "Mitchell Fehr"
   page-footer:
-    left: "Copyright 2025, Author Name"
+    left: "Copyright 2025, Mitchell Fehr"
   chapters:
     - index.qmd
     - intro.qmd

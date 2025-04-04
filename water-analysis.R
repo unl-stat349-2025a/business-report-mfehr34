@@ -8,13 +8,13 @@ library(imputeTS)
 col_widths <- c(4,3,3,3,3,5,5,4,6,6,6,5,6,6,6,6,5,6)
 col_names <- c('YY','MM','DD','hh','mm','WDIR','WSPD','GST','WVHT','DPD','APD',
                'MWD','PRES','ATMP','WTMP','DEWP','VIS','TIDE')
-dauphin2022 <- read.fwf("2022_DauphinIsland2_Data.txt", widths=col_widths,
+dauphin2022 <- read.fwf("data/2022_DauphinIsland2_Data.txt", widths=col_widths,
                         skip=1, col.names=col_names, colClasses='character')
 head(dauphin2022)
-dauphin2023 <- read.fwf("2023_DauphinIsland2_Data.txt", widths=col_widths,
+dauphin2023 <- read.fwf("data/2023_DauphinIsland2_Data.txt", widths=col_widths,
                         skip=1, col.names=col_names, colClasses='character')
 head(dauphin2023)
-dauphin2024 <- read.fwf("2024_DauphinIsland2_Data.txt", widths=col_widths,
+dauphin2024 <- read.fwf("data/2024_DauphinIsland2_Data.txt", widths=col_widths,
                         skip=1, col.names=col_names, colClasses='character')
 head(dauphin2024)
 
