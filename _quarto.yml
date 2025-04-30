@@ -8,22 +8,28 @@ book:
   page-footer:
     left: "Copyright 2025, Mitchell Fehr"
   chapters:
-    - index.qmd
-    - intro.qmd
     - summary.qmd
+    - intro.qmd
+    - methods.qmd
+    - results.qmd
+    - discussion.qmd
     - references.qmd
+    - part: "Drafts"
+      chapters:
+        - draft-data-doc.qmd
+        - draft-results.qmd
+        - draft-intro-conclusions.qmd
+        - draft-exec-summary.qmd
   appendices:
-    - draft-data-doc.qmd
-    - draft-results.qmd
-    - draft-intro-conclusions.qmd
-    - draft-exec-summary.qmd
+    - data-doc.qmd
+    - index.qmd
 
 bibliography: references.bib
 
 format:
   html:
     highlight-style: a11y
-    theme: cosmo
+    theme: materia
   pdf:
     documentclass: scrreprt
 

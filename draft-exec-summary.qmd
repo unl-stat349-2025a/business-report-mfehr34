@@ -1,6 +1,4 @@
----
-title: "Draft: Executive Summary"
----
+# Draft: Executive Summary {.unnumbered}
 
 With climate change on the rise, the Dauphin Island Power Plant must consider how increasing water temperatures will impact its operations. Currently, the plant relies on the assumption that water temperatures will remain below 85°F. When temperatures exceed this threshold, the power plant must operate at reduced capacity, limiting its ability to meet energy demands. Analyzing water temperatures and calculating the likelihood that they exceed the 85°F threshold in the future is critical to mitigating risks. Additionally, examining how periods of high water temperature correspond to peaks in energy demand will help us better evaluate the impact of reduced capacity.
 

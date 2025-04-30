@@ -1,5 +1,9 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+Climate change continues to be an increasingly impactful phenomenon around the globe. For businesses, evaluating long-term sustainability amid global warming is becoming more and more essential. Specifically, The Dauphin Island Power Plant, located off the coast in Alabama, needs to consider rising water temperatures and how they will impact energy production. In response to a request from one of the plant's managers, we conducted an analysis projecting water temperatures for the next five years and their potential impact on operations.
 
-See @knuth84 for additional discussion of literate programming.
+When the plant was built in 1970, it relied on the assumption that water temperatures would stay below 85°F most days of the year. In our current climate, that assumption might be a bit far fetched, but back then it was quite reasonable. When the water temperature goes above this threshold, the power plant must operate at reduced capacity to stay within regulations. This limitation has started to raise serious concerns about power plant reliability in the past decade, *especially* as energy demand increases.
+
+The question that naturally arises is how likely are water temperatures to exceed 85°F on the Dauphin Island coast and, if so, when are the periods to prepare for. In the subsequent analysis, I answer this question using a standard linear model to project future water temperatures based on historical data. To fully understand the operational risk and impact, I also examined the energy demand around times of projected high water temperatures, using a second standard linear model. This provided a more complete picture of how reduced capacity could align with energy demand.
+
+The primary objective of this analysis is to support the Dauphin Island Power Plant in anticipating future challenges and planning for mitigation. Our findings highlight the future months of June, July, August, and September as times with notably high water temperatures and, consequently, reduced operating capacity. Compounding this challenge, these months overlap with times of peak energy demand, potentially creating significant risks if left unaddressed. Fortunately, this report provides the data-driven foundation to take proactive steps.

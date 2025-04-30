@@ -1,6 +1,6 @@
 # Import libraries
 library(tidyverse)
-library(lubridate)
+sessionInfo()
 
 # Load in Energy dataset
 energy <- read.csv("data/SOCO Energy Data 2425.csv")
@@ -32,11 +32,8 @@ energy$Timestamp <- as.POSIXct(energy$Timestamp, format="%m/%d/%Y")
 summary(energy)
 
 # Create Year column and Month column
-#energy <- energy %>%
-#  mutate(Year = year(Timestamp))
 energy <- energy %>%
   mutate(Month = month(Timestamp))
-#energy$Year <- as.numeric(energy$Year)
 energy$Month <- as.factor(energy$Month)
 
 head(energy)
@@ -61,7 +58,7 @@ energy[energy$Demand == min(energy$Demand), ]
 # Plotting Demand over time
 ggplot(energy, aes(x=Timestamp, y=Demand)) +
   geom_line() +
-  labs(title = "Electricity Demand Over Time",
+  labs(title = "Energy Demand Over Time",
        x = "Timestamp", y = "Demand (MWh)")
 
 
@@ -91,14 +88,16 @@ monthly_data$Pred_SE <- predictions$se.fit
 
 # Visualize future predictions
 monthly_data <- monthly_data %>% arrange(Month)
-#future_data <- future_data %>%
-  #mutate(Date = paste(Year, Month, '01', sep='-'))
-#future_data$Date <- as.POSIXct(future_data$Date, format = "%Y-%m-%d", tz = "UTC")
 head(monthly_data)
 
 ggplot(monthly_data, aes(x=as.numeric(Month), y=Pred_Demand)) +
   geom_line() +
-  labs(title = "Electricity Demand By Month",
+  annotate("rect",
+           xmin = 6, xmax = 9,
+           ymin = -Inf, ymax = +Inf,
+           fill = "steelblue", alpha = 0.2 ) +
+  scale_x_continuous(breaks=1:12, labels=month.abb) +
+  labs(title = "Energy Demand By Month",
        x = "Month", y = "Demand (MWh)")
 
 

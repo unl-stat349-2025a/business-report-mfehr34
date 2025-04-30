@@ -1,8 +1,5 @@
 # Import libraries
 library(tidyverse)
-library(stats)
-library(ggplot2)
-library(imputeTS)
 
 # Import the Dauphin Islsand Water Temp datasets
 col_widths <- c(4,3,3,3,3,5,5,4,6,6,6,5,6,6,6,6,5,6)
@@ -18,7 +15,6 @@ dauphin2024 <- read.fwf("data/2024_DauphinIsland2_Data.txt", widths=col_widths,
                         skip=1, col.names=col_names, colClasses='character')
 head(dauphin2024)
 
-
 ### Data Transformation ###
 
 # Keep only the relevant fields and combine the datasets into one for each buoy
@@ -29,7 +25,7 @@ dauphin2024 <- dauphin2024 %>% select(YY, MM, DD, hh, mm, WTMP)
 watertemp <- bind_rows(dauphin2022, dauphin2023, dauphin2024)
 summary(watertemp)
 
-# Create Timestamp column by combining YY, MM, DD, hh, and mm columns
+## Create Timestamp column by combining YY, MM, DD, hh, and mm columns
 
 # First, remove extra whitespaces
 watertemp$YY <- str_trim(watertemp$YY, side='both')
@@ -51,26 +47,29 @@ head(watertemp)
 # Finally, combine the columns into one and get rid of redundant columns
 watertemp <- watertemp %>%
   mutate(Timestamp = paste(Date, Time, sep=' '))
+watertemp$Timestamp <- as.POSIXct(watertemp$Timestamp, format="%Y-%m-%d %H:%M", tz='UTC')
 watertemp$Year <- as.numeric(watertemp$YY)
 watertemp$Month <- as.factor(watertemp$MM)
 
-watertemp <- watertemp %>% select(Timestamp, Year, Month, WTMP)
+# Change water temperature to degrees Fahrenheit
+watertemp$WTMP <- as.double(watertemp$WTMP)
+watertemp <- watertemp %>%
+  mutate(WTMP_F = WTMP * 1.8 + 32)
+
+# Only keep necessary columns
+watertemp <- watertemp %>% select(Timestamp, Year, Month, WTMP_F)
 head(watertemp)
 
-# Change columns to correct data types
-watertemp$Timestamp <- as.POSIXct(watertemp$Timestamp, format="%Y-%m-%d %H:%M", tz='UTC')
-watertemp$WTMP <- as.double(watertemp$WTMP)
-
 # Plot with missing values
-plot(watertemp$Timestamp, watertemp$WTMP)
+plot(watertemp$Timestamp, watertemp$WTMP_F)
 
 # Rows with missing timestamps
 watertemp[is.na(watertemp$Timestamp), ]
 
-# Proportion of missing water temp values
-sum(watertemp$WTMP == 999.0) / nrow(watertemp)
+# Proportion of missing water temp values (1830.2 is 999.0 celsius but in fahrenheit)
+sum(watertemp$WTMP_F == 1830.2) / nrow(watertemp)
 # Not very many, so drop missing values
-watertemp <- watertemp[(watertemp$WTMP != 999.0), ]
+watertemp <- watertemp[(watertemp$WTMP != 1830.2), ]
 
 
 ############################################
@@ -82,17 +81,17 @@ watertemp <- watertemp[(watertemp$WTMP != 999.0), ]
 summary(watertemp)
 
 # Standard deviation
-sd(watertemp$WTMP)
+sd(watertemp$WTMP_F)
 # Maximum
-watertemp[watertemp$WTMP == max(watertemp$WTMP), ]
+watertemp[watertemp$WTMP_F == max(watertemp$WTMP_F), ]
 # Minimum
-watertemp[watertemp$WTMP == min(watertemp$WTMP), ]
+watertemp[watertemp$WTMP_F == min(watertemp$WTMP_F), ]
 
 # Plotting temperature over time with horizontal line at operating threshold
-ggplot(watertemp, aes(x = Timestamp, y = WTMP)) +
+ggplot(watertemp, aes(x = Timestamp, y = WTMP_F)) +
   geom_line() +
-  geom_hline(yintercept=29.44, color="red", linetype="dashed", linewidth=0.5) +
-  labs(title = "Water Temp Over Time", x = "Date", y = "Temperature (°C)")
+  geom_hline(yintercept=85, color="red", linetype="dashed", linewidth=0.5) +
+  labs(title = "Water Temp Over Time", x = "Date", y = "Temperature (°F)")
 
 
 ############################################
@@ -101,7 +100,7 @@ ggplot(watertemp, aes(x = Timestamp, y = WTMP)) +
 ### Linear Model
 
 
-lm_model <- lm(WTMP ~ Year + Month, data = watertemp)
+lm_model <- lm(WTMP_F ~ Year + Month, data = watertemp)
 
 # Summary of the model (to see main effects)
 summary(lm_model)
@@ -118,12 +117,12 @@ predictions <- predict(lm_model, newdata = future_data, se.fit = TRUE)
 # Store prediction data in future_data
 future_data$Pred_WTMP <- predictions$fit
 future_data$Pred_SE <- predictions$se.fit
-# Calculate prob. that the water temperature is above 85°F (29.44 °C) for each month/year
+# Calculate prob. that the water temperature is above 85°F for each month/year
 future_data <- future_data %>%
-  mutate(prob_above = 1 - pnorm(29.44, mean = Pred_WTMP, sd = Pred_SE))
+  mutate(prob_above = 1 - pnorm(85, mean = Pred_WTMP, sd = Pred_SE))
 
 # See which predictions exceed 85°F and their prob.
-above_85 <- future_data %>% filter(Pred_WTMP > 29.44)
+above_85 <- future_data %>% filter(Pred_WTMP > 85)
 print(above_85)
 
 # Visualize future predictions
@@ -135,6 +134,6 @@ head(future_data)
 
 ggplot(future_data, aes(x=Date, y=Pred_WTMP)) +
   geom_line() +
-  geom_hline(yintercept = 29.44, linetype = "dashed", color = "red") +
+  geom_hline(yintercept = 85, linetype = "dashed", color = "red") +
   labs(title = "Projected Water Temperature Over the Next 5 Years",
-       x = "Time (Year)", y = "Water Temperature (°C)")
+       x = "Time (Year)", y = "Water Temperature (°F)")
