@@ -26,17 +26,5 @@ The next step was to predict the next 5 years of water temperatures using the fi
 
 The secondary analysis was examining the electrical demand over the past year, specifically looking at the months that were found to have a predicted water temperature exceeding the threshold. These months (June, July, August, September) are when the plant is predicted to operate at reduced capacity, limiting the amount of energy output. A standard linear model was fit to the energy data with the input as the factor Month and the output as electricity demand. The model had an F-statistic of 66.26 (p-value \< 2e-16). Every main effect for the month was significant except for May and September with p-values greater than 0.53. The adjusted R-squared for the model was 0.66 suggesting a moderate fit. Finally, electrical demand by month was predicted and is visualized in Figure 4. The shaded blue regions are the months predicted to be at reduced operating capacity, the main Months considered.
 
-```{r, echo=F, message=F, warning=F, include=F}
-source("water-analysis.R")
-
-```
-
-```{r, echo=F}
-ggplot(future_data, aes(x=Date, y=Pred_WTMP)) +
-  geom_line() +
-  geom_hline(yintercept = 85, linetype = "dashed", color = "red") +
-  labs(title = "Projected Water Temperature Over the Next 5 Years",
-       x = "Time (Year)", y = "Water Temperature (°F)")
-```
 
 ![**Figure 4.** *Electricity Demand By Month.* Month on the x-axis and Demand on the y-axis.](images/DemandByMonth.png){fig-align="center"}

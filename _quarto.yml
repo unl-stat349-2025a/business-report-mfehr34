@@ -8,7 +8,7 @@ book:
   page-footer:
     left: "Copyright 2025, Mitchell Fehr"
   chapters:
-    - summary.qmd
+    - index.qmd
     - intro.qmd
     - methods.qmd
     - results.qmd
@@ -22,7 +22,9 @@ book:
         - draft-exec-summary.qmd
   appendices:
     - data-doc.qmd
-    - index.qmd
+    - preface.qmd
+    - water-analysis.qmd
+    - energy-analysis.qmd
 
 bibliography: references.bib
 

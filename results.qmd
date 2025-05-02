@@ -1,17 +1,13 @@
 # Results
 
 ```{r, echo=F, warning=F, message=F, include=F}
-source("water-analysis.R")
-source("energy-analysis.R")
+source("R-code/water-analysis.R")
+source("R-code/energy-analysis.R")
 ```
 
-## Data
+## Exploratory Data Analysis
 
-The water temperature data was aggregated from three smaller datasets, each representing one year: 2022, 2023, and 2024. For analysis, these datasets were first combined into a single dataset containing 20,334 records. Next, the time-related fields (Year, Month, Day, Hour, and Minute) were combined into a Timestamp variable so that they could be used for EDA and visualization, though this variable wasn't used in our modeling. Following this, missing values were analyzed and dealt with. Only 2.84% of Timestamps lacked corresponding water temperature measurement. Since that percentage was minimal compared to the size of our dataset, those records were dropped. The workflow is visualized in the following diagram:
-
-![](images/Water-data-workflow.png){fig-align="center"}
-
-As mentioned in the Methods, water temperatures were initially recorded in degrees Celsius, but converted to degrees Fahrenheit for convenience. The mean water temperature was 72.64°F with a standard deviation of 11.84°F. The minimum water temperature was 46.22°F occurring on April 6, 2022. The maximum was 95.36°F occurring January 22, 2022; January 23, 2022; and January 22, 2024. Figure 1 displays the trends of water temperature over the recorded time period.
+Before the statistical modeling, this analysis considered each dataset's descriptive statistics and visualized their key trends. The mean water temperature was 72.64°F with a standard deviation of 11.84°F. The maximum water temperature was 95.36°F occurring on April 6, 2022. The minimum was 46.22°F occurring on January 22, 2022; January 23, 2022; and January 22, 2024. Figure 3 displays the trends of water temperature over the recorded time period.
 
 ```{r, echo=F}
 ggplot(watertemp, aes(x = Timestamp, y = WTMP_F)) +
@@ -20,11 +16,9 @@ ggplot(watertemp, aes(x = Timestamp, y = WTMP_F)) +
   labs(title = "Water Temperature Over Time", x = "Timestamp", y = "Temperature (°F)")
 ```
 
-| **Figure 1:** *Water Temperature Over Time.* Timestamp is on the x-axis and Temperature is on the y-axis. The red dashed line marks the reduced capacity threshold (85°F).
+| **Figure 3:** *Water Temperature Over Time.* Timestamp is on the x-axis and Temperature is on the y-axis. The red dashed line marks the reduced capacity threshold (85°F).
 
-Preparing the energy demand data was more straightforward than the water temperature data. The dataset contained 364 records without any missing values (to our welcome surprise). The only significant transformation involved extracting the Month field from the provided Timestamp.
-
-Energy demand was measured in megawatt-hours (MWh). The dataset had a mean demand of 658,977 MWh with a standard deviation of 105,189 MWh. The minimum demand was 489,834 MWh observed on April 13, 2024. The maximum demand was 990,613 MWh observed on January 1, 2025. Figure 2 visualizes the trend of electrical demand over the past year. The overall trends and monthly variations are harder to pick out than for water temperature.
+The dataset for energy demand had a mean demand of 658,977 MWh with a standard deviation of 105,189 MWh. The minimum demand was 489,834 MWh observed on April 13, 2024. The maximum demand was 990,613 MWh observed on January 1, 2025. Figure 4 visualizes the trend of energy demand over the past year. The overall trends and monthly variations are harder to pick out than for water temperature.
 
 ```{r, echo=F}
 ggplot(energy, aes(x=Timestamp, y=Demand)) +
@@ -33,13 +27,13 @@ ggplot(energy, aes(x=Timestamp, y=Demand)) +
        x = "Timestamp", y = "Demand (MWh)")
 ```
 
-| **Figure 2:** *Energy Demand Over Time.* Timestamp is on the x-axis and Demand is on the y-axis.
+| **Figure 4:** *Energy Demand Over Time.* Timestamp is on the x-axis and Demand is on the y-axis.
 
-## Analysis
+## Statistical Modeling
 
 After exploring the descriptive statistics, a standard linear model was fitted to the Water Temperature data, using Year and Month as inputs and Water Temperature as the output. Year was treated as a numeric variable, while Month was treated as a factor. The model yielded a statistically significant F-statistic of 12,200 (p-value \< 2e-16). Additionally, the main effects for each month and the main effect for year were statistically significant (p-value \< 2e-16). The main effect with the largest effect was July, with an estimate of 31.12, whereas Year showed the smallest effect, with an estimate of 0.40. The models' adjusted R-squared value was 0.88, suggesting a good fit.
 
-The next step in our primary analysis was forecasting water temperatures for the next five years using our fitted model. The projections indiciate that eighteen months within this period are expected to have water temperatures above 85°F, all falling into the buckets of June, July, August, and September. Seventeen out of these eighteen months have a 99% chance or higher to exceed the threshold. These forecasts are visualized in Figure 3, with a horizontal line marking the threshold.
+The next step in the primary analysis was forecasting water temperatures for the next five years using the fitted linear model. The projections indiciate that eighteen months within this period are expected to have water temperatures above 85°F, all falling into the buckets of June, July, August, and September. Seventeen out of these eighteen months have a 99% chance or higher to exceed the threshold. These forecasts are visualized in Figure 5, with a horizontal line marking the threshold.
 
 ```{r, echo=F}
 ggplot(future_data, aes(x=Date, y=Pred_WTMP)) +
@@ -49,9 +43,9 @@ ggplot(future_data, aes(x=Date, y=Pred_WTMP)) +
        x = "Date", y = "Water Temperature (°F)")
 ```
 
-| **Figure 3:** *Projected Water Temperature For the Next 5 Years*. Date (Month, Year) is on the x-axis and Water Temperature is on the y-axis. The red dashed line shows the reduced capacity threshold (85°F).
+| **Figure 5:** *Projected Water Temperature For the Next 5 Years*. Date (Month, Year) is on the x-axis and Water Temperature is on the y-axis. The red dashed line shows the reduced capacity threshold (85°F).
 
-The goal of our secondary analysis was to examine energy demand trends from the past year, focusing particularly on months predicted to have water temperatures exceeding the threshold. These months, June, July, August, and September, represent periods when the plant is predicted to operate at reduced capacity. Another standard linear model was applied to the energy demand data with Month as the predictor and Demand as the output. The model had a statistically significant F-statistic of 66.26 (p-value \< 2e-16). The majority of main effects for Month were also statistically significant, with the exceptions of May and September (p-values \> 0.53). The model's adjusted R-squared value was 0.66, suggesting a moderate fit. Finally, the averages for energy demand each month were obtained. The highest spikes in demand appeared to occur in the months of January, June, July, and August. These monthly averages are visualized in Figure 4, with the shaded blue region representing the period expected to be at reduced operating capacity.
+The goal of the secondary analysis was to examine energy demand trends from the past year, focusing particularly on months predicted to have water temperatures exceeding the threshold. These months, June, July, August, and September, represent periods when the plant is predicted to operate at reduced capacity. Another standard linear model was applied to the energy demand data with Month as the predictor and Demand as the output. The model had a statistically significant F-statistic of 66.26 (p-value \< 2e-16). The majority of main effects for Month were also statistically significant, with the exceptions of May and September (p-values \> 0.53). The model's adjusted R-squared value was 0.66, suggesting a moderate fit. Finally, the averages for energy demand each month were obtained. The highest spikes in demand appeared to occur in the months of January, June, July, and August. These monthly averages are visualized in Figure 6, with the shaded blue region representing the period expected to be at reduced operating capacity.
 
 ```{r, echo=F}
 ggplot(monthly_data, aes(x=as.numeric(Month), y=Pred_Demand)) +
@@ -65,4 +59,4 @@ ggplot(monthly_data, aes(x=as.numeric(Month), y=Pred_Demand)) +
        x = "Month", y = "Demand (MWh)")
 ```
 
-| **Figure 4:** *Energy Demand By Month.* Month is on the x-axis and Demand is on the y-axis. The blue shaded region corresponds to the months where water temperatures are predicted to exceed the threshold.
+| **Figure 6:** *Energy Demand By Month.* Month is on the x-axis and Demand is on the y-axis. The blue shaded region corresponds to the months where water temperatures are predicted to exceed the threshold.

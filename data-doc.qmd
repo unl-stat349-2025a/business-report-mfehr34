@@ -8,7 +8,7 @@ The **Historical Dauphin Island Meteorological Data Set** was used to analyze an
 
 The data was collected by the National Data Buoy Center (NDBC), a branch of the National Oceanic and Atmospheric Administration (NOAA). The NDBC collected this data to record hourly metrics for the Dauphin Island coast. The NDBC used one of their many Moored Buoys to record data on barometric pressure, wind direction/speed/gust, air/sea temperature, and wave energy spectra. This specific buoy is located right off the east coast of Dauphin Island, AL.
 
-There are three data sets that have the exact same data and structure that I will be combining to analyze the trends of water temperature. These data sets are separated by year, from the years 2022, 2023, and 2024. Data was collected every six minutes (sometimes every thirty minutes), every day of the year, and recorded as a new instance. The data starts in January 2022 and ends in December 2024.
+There are three data sets that have the exact same data and structure that were combined to analyze the trends of water temperature. These data sets are separated by year, from the years 2022, 2023, and 2024. Data was collected every thirty minutes (sometimes every six minutes), every day of the year, and recorded as a new instance. The data starts in January 2022 and ends in December 2024.
 
 The files are in a tab delimited .txt format. Missing data points are denoted by values of 99.00 or 999.0. The fields in this data set are:
 
